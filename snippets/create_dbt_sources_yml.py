@@ -1,3 +1,4 @@
+#Based by: https://github.com/dbt-labs/dbt-core/issues/1082
 from sqlalchemy import create_engine
 import pandas as pd 
 conn = create_engine('YOUR DB CONNECTION STRING HERE')
