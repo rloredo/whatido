@@ -10,10 +10,6 @@ db_metadata = pd.read_sql_query("""SELECT table_schema,
                                     FROM information_schema."columns"
                                  """, conn)
 
-
-
-sources_dict = {}
-
 for schema in db_metadata.table_schema.unique():
     tmp_str = f"version: 2\n\nsources:\n  - name: {schema}\n    tables:\n"
     
@@ -34,6 +30,5 @@ for schema in db_metadata.table_schema.unique():
         ymlfile.write(tmp_str)
         ymlfile.close()      
     
-    #Make a dictionary with the strings. 
-    sources_dict.update({f'{schema}': tmp_str})
-    #TODO use the dict to compare previous and new yml files, and update them.  
+    #TODO instead of strings, create dicts. It will be useful to compare and update
+     
