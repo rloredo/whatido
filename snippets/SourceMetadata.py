@@ -43,7 +43,7 @@ class SourceMetadata:
             sources_dict.update({f"{schema}": {"version":2, "sources": [{"name": schema, "tables": tmp_table_list}]}})
         return sources_dict
 
-    def write_to_yml(self, sources_folder_path:str, exclude:list = [])->None:
+    def write_to_yml(self, sources_folder_path:str= '.', exclude:list = [])->None:
         """
         Write one yml file per schema in the database
         """
@@ -62,4 +62,4 @@ if __name__ == '__main__':
     from sqlalchemy import create_engine
     conn = create_engine('YOUR DB CONNECTION STRING HERE')
     MyDB = SourceMetadata(conn)  
-    MyDB.write_to_yml('.')
+    MyDB.write_to_yml()
