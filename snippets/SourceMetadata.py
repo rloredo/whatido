@@ -2,12 +2,12 @@
 import pandas as pd
 import yaml
 
-class Source:
+class SourceMetadata:
     def __init__(self, db_connection_engine):
         self.conn = db_connection_engine
-        self.sources_metadata_df = self._get_sources_df()
+        self.sources_metadata_df = self._get_metadata_df()
 
-    def _get_sources_df(self) -> pd.DataFrame:
+    def _get_metadata_df(self) -> pd.DataFrame:
         """
         Get all source metadata from a database.
         """
@@ -25,7 +25,6 @@ class Source:
         Return available schemas of the database
         Useful for exclude param
         """
-
         return set(self.sources_metadata_df.table_schema.unique())
 
     def get_sources_dict(self, exclude:list = []) -> dict:
@@ -62,5 +61,5 @@ class IndentedDumper(yaml.Dumper):
 if __name__ == '__main__':
     from sqlalchemy import create_engine
     conn = create_engine('YOUR DB CONNECTION STRING HERE')
-    MyDB = Source(conn)  
+    MyDB = SourceMetadata(conn)  
     MyDB.write_to_yml('.')
